@@ -1,8 +1,9 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Sailfish.WebView 1.0
+import Sailfish.WebEngine 1.0
 
-Page {
+WebViewPage {
     id: page
 
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
@@ -11,6 +12,16 @@ Page {
     WebView {
         anchors.fill: parent
         active: true
-        url: "http://www.sailfishos.org"
+        url: "https://browser.sailfishos.org/tests/testpage.html"
+
+        onLinkClicked: {
+            console.log("Link clicked")
+            WebEngine.notifyObservers("exampleTopic", url)
+        }
+
+        Component.onCompleted: {
+            WebEngine.addComponentManifest("/usr/share/harbour-webview/components/components.manifest")
+            console.log("Component added")
+        }
     }
 }
