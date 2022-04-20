@@ -1,22 +1,22 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import QtWebKit 3.0
-import QtWebKit.experimental 1.0
+import Sailfish.WebView 1.0
+import Sailfish.WebEngine 1.0
+import Sailfish.WebView.Popups 1.0
 
 Page {
     id: page
     allowedOrientations: Orientation.All
 
-    SilicaWebView {
+    WebView {
         anchors.fill: parent
         url: "http://www.sailfishos.org"
+        privateMode: true
+        httpUserAgent: "Mozilla/5.0 (Mobile; rv:78.0) Gecko/78.0 Firefox/78.0"
 
-        experimental.temporaryCookies: true
-        experimental.userAgent: "Mozilla/5.0 (Mobile Linux; U; like Android 4.4.3;"
-            + " Sailfish OS/2.0) AppleWebkit/535.19 (KHTML, like Gecko)"
-            + " Version/4.0 Mobile Safari/535.19"
-        experimental.autoCorrect: false
-        experimental.deviceWidth: parent.width
-        experimental.deviceHeight: parent.height
+        popupProvider: PopupProvider {
+             // Disable the Save Password dialog
+             passwordManagerPopup: null
+        }
     }
 }
