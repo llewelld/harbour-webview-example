@@ -17,10 +17,6 @@ URL:        https://github.com/black-sheep-dev/harbour-webview-example
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-webview.yaml
 Requires:   sailfishsilica-qt5 >= 0.10.9
-Requires:   qtmozembed-qt5
-Requires:   sailfish-components-webview-qt5
-Requires:   sailfish-components-webview-qt5-popups
-Requires:   sailfish-components-webview-qt5-pickers
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)

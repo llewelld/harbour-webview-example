@@ -1,16 +1,22 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Sailfish.WebView 1.0
+import QtWebKit 3.0
+import QtWebKit.experimental 1.0
 
 Page {
     id: page
-
-    // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.All
 
-    WebView {
+    SilicaWebView {
         anchors.fill: parent
-        active: true
         url: "http://www.sailfishos.org"
+
+        experimental.temporaryCookies: true
+        experimental.userAgent: "Mozilla/5.0 (Mobile Linux; U; like Android 4.4.3;"
+            + " Sailfish OS/2.0) AppleWebkit/535.19 (KHTML, like Gecko)"
+            + " Version/4.0 Mobile Safari/535.19"
+        experimental.autoCorrect: false
+        experimental.deviceWidth: parent.width
+        experimental.deviceHeight: parent.height
     }
 }
