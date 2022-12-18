@@ -2,17 +2,52 @@
 
 #include <sailfishapp.h>
 
+#include "webenginesettings.h"
+
+static void showHelp()
+{
+    qDebug() << "Usage: cmd --help | [URL]...";
+}
+
 int main(int argc, char *argv[])
 {
-    // SailfishApp::main() will display "qml/harbour-webview.qml", if you need more
-    // control over initialization, you can use:
-    //
-    //   - SailfishApp::application(int, char *[]) to get the QGuiApplication *
-    //   - SailfishApp::createView() to get a new QQuickView * instance
-    //   - SailfishApp::pathTo(QString) to get a QUrl to a resource file
-    //   - SailfishApp::pathToMainQml() to get a QUrl to the main QML file
-    //
-    // To display the view, call "show()" (will show fullscreen on device).
+    bool execute = true;
+    int result = 0;
+    QString startUrl;
 
-    return SailfishApp::main(argc, argv);
+    qDebug() << "WebView Example";
+
+    if ((argc > 2) || ((argc == 2) && (strcmp("--help", argv[1]) == 0))) {
+        showHelp();
+        execute = false;
+    }
+
+    if (execute) {
+        if (argc == 2) {
+            startUrl = QString(argv[1]);
+            qDebug() << "Start URL set to: " << startUrl;
+        }
+        else {
+            startUrl = QStringLiteral("https://www.flypig.co.uk/search/");
+            qDebug() << "Using default start URL: " << startUrl;
+        }
+
+        qDebug() << "Opening webview";
+
+        QGuiApplication *app = SailfishApp::application(argc, argv);
+
+        QQuickView *view = SailfishApp::createView();
+        // The engine takes ownership of the ImageProvider
+        view->setSource(SailfishApp::pathTo("qml/harbour-webview.qml"));
+
+        QQmlContext *ctxt = view->rootContext();
+        ctxt->setContextProperty("startUrl", startUrl);
+        view->show();
+
+        SailfishOS::WebEngineSettings *webEngineSettings = SailfishOS::WebEngineSettings::instance();
+
+        result = app->exec();
+    }
+
+    return result;
 }

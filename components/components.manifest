@@ -1,0 +1,3 @@
+component {20227a22-1722-4753-b8f7-c842b401b4c3} component.js
+contract @mozilla.org/embedlite-example-component;1 {20227a22-1722-4753-b8f7-c842b401b4c3}
+category app-startup ExampleComponent service,@mozilla.org/embedlite-example-component;1

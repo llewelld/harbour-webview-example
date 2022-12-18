@@ -17,6 +17,9 @@ PKGCONFIG += qt5embedwidget
 
 SOURCES += src/harbour-webview.cpp
 
+PKGCONFIG += \
+    sailfishwebengine
+
 DISTFILES += qml/harbour-webview.qml \
     qml/cover/CoverPage.qml \
     qml/pages/WebViewPage.qml \
@@ -25,6 +28,8 @@ DISTFILES += qml/harbour-webview.qml \
     rpm/harbour-webview.spec \
     rpm/harbour-webview.yaml \
     translations/*.ts \
+    components/components.manifest \
+    components/*.js
     harbour-webview.desktop
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
@@ -38,3 +43,8 @@ CONFIG += sailfishapp_i18n
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/harbour-webview-de.ts
+
+components.path = /usr/share/$$TARGET/components/
+components.files = $$PWD/components/components.manifest $$PWD/components/*.js
+
+INSTALLS += components
